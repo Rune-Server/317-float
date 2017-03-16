@@ -320,30 +320,32 @@ public final class Sprite extends DrawingArea {
 		}
 	}
 
-	public void method352(int i, int j, int ai[], int k, int ai1[], int i1, int j1, int k1, int l1, int i2) {
+	private final double magic = 2048 / (Math.PI * 2);
+
+	public void method352(int height, int angle, int lengthTable[], int zoom, int startTable[], int i1, int j1, int k1, int width, int i2) {
 		try {
-			int j2 = -l1 / 2;
-			int k2 = -i / 2;
-			int l2 = (int) (Math.sin((double) j / 326.11000000000001D) * 65536D);
-			int i3 = (int) (Math.cos((double) j / 326.11000000000001D) * 65536D);
-			l2 = l2 * k >> 8;
-			i3 = i3 * k >> 8;
-			int j3 = (i2 << 16) + (k2 * l2 + j2 * i3);
-			int k3 = (i1 << 16) + (k2 * i3 - j2 * l2);
-			int l3 = k1 + j1 * DrawingArea.width;
-			for (j1 = 0; j1 < i; j1++) {
-				int i4 = ai1[j1];
-				int j4 = l3 + i4;
-				int k4 = j3 + i3 * i4;
-				int l4 = k3 - l2 * i4;
-				for (k1 = -ai[j1]; k1 < 0; k1++) {
-					DrawingArea.pixels[j4++] = myPixels[(k4 >> 16) + (l4 >> 16) * myWidth];
-					k4 += i3;
-					l4 -= l2;
+			double centerX = -width / 2;
+			double centerY = -height / 2;
+			double sin = Math.sin(angle / magic);
+			double cos = Math.cos(angle / magic);
+			sin = sin * zoom / 256.0F;
+			cos = cos * zoom / 256.0F;
+			double j3 = i2 + (centerY * sin + centerX * cos);
+			double k3 = i1 + (centerY * cos - centerX * sin);
+			double l3 = k1 + j1 * DrawingArea.width;
+			for (j1 = 0; j1 < height; j1++) {
+				double i4 = startTable[j1];
+				double j4 = l3 + i4;
+				double k4 = j3 + cos * i4;
+				double l4 = k3 - sin * i4;
+				for (k1 = -lengthTable[j1]; k1 < 0; k1++) {
+					DrawingArea.pixels[(int) j4++] = myPixels[(int) (k4 + (int) l4 * myWidth)];
+					k4 += cos;
+					l4 -= sin;
 				}
 
-				j3 += l2;
-				k3 += i3;
+				j3 += sin;
+				k3 += cos;
 				l3 += DrawingArea.width;
 			}
 
