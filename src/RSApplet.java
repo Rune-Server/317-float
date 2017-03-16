@@ -271,6 +271,10 @@ public class RSApplet extends Applet implements Runnable, MouseListener, MouseMo
 			charQueue[writeIndex] = j;
 			writeIndex = writeIndex + 1 & 0x7f;
 		}
+		
+		if (keyevent.getKeyCode() == KeyEvent.VK_SHIFT) {
+			client.shiftHeld = true;
+		}
 	}
 
 	public final void keyReleased(KeyEvent keyevent) {
@@ -299,6 +303,10 @@ public class RSApplet extends Applet implements Runnable, MouseListener, MouseMo
 			c = '\n';
 		if (c > 0 && c < '\200')
 			keyArray[c] = 0;
+
+		if (keyevent.getKeyCode() == KeyEvent.VK_SHIFT) {
+			client.shiftHeld = false;
+		}
 	}
 
 	public final void keyTyped(KeyEvent keyevent) {

@@ -266,10 +266,16 @@ public class client extends RSApplet {
 			}
 		} else {
 			if (j == 1 && menuActionRow > 0) {
-				int i1 = menuActionID[menuActionRow - 1];
+				int index;
+				if (dropIndex != -1) {
+					index = dropIndex;
+				} else {
+					index = menuActionRow - 1;
+				}
+				int i1 = menuActionID[index];
 				if (i1 == 632 || i1 == 78 || i1 == 867 || i1 == 431 || i1 == 53 || i1 == 74 || i1 == 454 || i1 == 539 || i1 == 493 || i1 == 847 || i1 == 447 || i1 == 1125) {
-					int l1 = menuActionCmd2[menuActionRow - 1];
-					int j2 = menuActionCmd3[menuActionRow - 1];
+					int l1 = menuActionCmd2[index];
+					int j2 = menuActionCmd3[index];
 					RSInterface class9 = RSInterface.interfaceCache[j2];
 					if (class9.aBoolean259 || class9.aBoolean235) {
 						aBoolean1242 = false;
@@ -289,8 +295,16 @@ public class client extends RSApplet {
 			}
 			if (j == 1 && (anInt1253 == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2)
 				j = 2;
-			if (j == 1 && menuActionRow > 0)
-				doAction(menuActionRow - 1);
+			if (j == 1 && menuActionRow > 0) {
+				int index;
+				if (dropIndex != -1) {
+					index = dropIndex;
+				} else {
+					index = menuActionRow - 1;
+				}
+
+				doAction(index);
+			}
 			if (j == 2 && menuActionRow > 0)
 				determineMenuSize();
 		}
@@ -538,28 +552,9 @@ public class client extends RSApplet {
 					i3 = i3 >> 14 & 0x7fff;
 					int j3 = ObjectDef.forID(i3).anInt746;
 					if (j3 >= 0) {
-						int k3 = k2;
-						int l3 = l2;
-						if (j3 != 22 && j3 != 29 && j3 != 34 && j3 != 36 && j3 != 46 && j3 != 47 && j3 != 48) {
-							byte byte0 = 104;
-							byte byte1 = 104;
-							int ai1[][] = aClass11Array1230[plane].anIntArrayArray294;
-							for (int i4 = 0; i4 < 10; i4++) {
-								int j4 = (int) (Math.random() * 4D);
-								if (j4 == 0 && k3 > 0 && k3 > k2 - 3 && (ai1[k3 - 1][l3] & 0x1280108) == 0)
-									k3--;
-								if (j4 == 1 && k3 < byte0 - 1 && k3 < k2 + 3 && (ai1[k3 + 1][l3] & 0x1280180) == 0)
-									k3++;
-								if (j4 == 2 && l3 > 0 && l3 > l2 - 3 && (ai1[k3][l3 - 1] & 0x1280102) == 0)
-									l3--;
-								if (j4 == 3 && l3 < byte1 - 1 && l3 < l2 + 3 && (ai1[k3][l3 + 1] & 0x1280120) == 0)
-									l3++;
-							}
-
-						}
 						aClass30_Sub2_Sub1_Sub1Array1140[anInt1071] = mapFunctions[j3];
-						anIntArray1072[anInt1071] = k3;
-						anIntArray1073[anInt1071] = l3;
+						anIntArray1072[anInt1071] = k2;
+						anIntArray1073[anInt1071] = l2;
 						anInt1071++;
 					}
 				}
@@ -768,6 +763,9 @@ public class client extends RSApplet {
 													menuActionCmd2[menuActionRow] = k2;
 													menuActionCmd3[menuActionRow] = class9_1.id;
 													menuActionRow++;
+													if (shiftHeld) {
+														dropIndex = menuActionRow;
+													}
 												}
 
 										}
@@ -2484,8 +2482,16 @@ public class client extends RSApplet {
 					}
 				} else if ((anInt1253 == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2)
 					determineMenuSize();
-				else if (menuActionRow > 0)
-					doAction(menuActionRow - 1);
+				else if (menuActionRow > 0) {
+					int index;
+					if (dropIndex != -1) {
+						index = dropIndex;
+					} else {
+						index = menuActionRow - 1;
+					}
+
+					doAction(index);
+				}
 				atInventoryLoopCycle = 10;
 				super.clickMode3 = 0;
 			}
@@ -4698,6 +4704,7 @@ public class client extends RSApplet {
 		menuActionName[0] = "Cancel";
 		menuActionID[0] = 1107;
 		menuActionRow = 1;
+		dropIndex = -1;
 		buildSplitPrivateChatMenu();
 		anInt886 = 0;
 		if (super.mouseX > 4 && super.mouseY > 4 && super.mouseX < 516 && super.mouseY < 338)
@@ -4847,6 +4854,7 @@ public class client extends RSApplet {
 				anInt1011 = 0;
 				anInt855 = 0;
 				menuActionRow = 0;
+				dropIndex = -1;
 				menuOpen = false;
 				super.idleTime = 0;
 				for (int j1 = 0; j1 < 100; j1++)
@@ -4994,6 +5002,7 @@ public class client extends RSApplet {
 				anInt1009 = 0;
 				anInt1104 = 0;
 				menuActionRow = 0;
+				dropIndex = -1;
 				menuOpen = false;
 				aLong824 = System.currentTimeMillis();
 				return;
@@ -5820,16 +5829,6 @@ public class client extends RSApplet {
 			sprite = new Sprite(streamLoader_2, "backhmid2", 0);
 			backVmidIP2_2 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
 			sprite.method346(0, 0);
-			int i5 = (int) (Math.random() * 21D) - 10;
-			int j5 = (int) (Math.random() * 21D) - 10;
-			int k5 = (int) (Math.random() * 21D) - 10;
-			int l5 = (int) (Math.random() * 41D) - 20;
-			for (int i6 = 0; i6 < 100; i6++) {
-				if (mapFunctions[i6] != null)
-					mapFunctions[i6].method344(i5 + l5, j5 + l5, k5 + l5);
-				if (mapScenes[i6] != null)
-					mapScenes[i6].method360(i5 + l5, j5 + l5, k5 + l5);
-			}
 
 			drawLoadingText(83, "Unpacking textures");
 			Texture.method368(streamLoader_3);
@@ -7677,8 +7676,16 @@ public class client extends RSApplet {
 			s = "Use " + selectedItemName + " with...";
 		else if (spellSelected == 1 && menuActionRow < 2)
 			s = spellTooltip + "...";
-		else
-			s = menuActionName[menuActionRow - 1];
+		else {
+			int index;
+			if (dropIndex != -1) {
+				index = dropIndex;
+			} else {
+				index = menuActionRow - 1;
+			}
+
+			s = menuActionName[index];
+		}
 		if (menuActionRow > 2)
 			s = s + "@whi@ / " + (menuActionRow - 2) + " more options";
 		chatTextDrawingArea.method390(4, 0xffffff, s, loopCycle / 1000, 15);
@@ -10427,6 +10434,8 @@ public class client extends RSApplet {
 	private static int anInt1288;
 	private int anInt1289;
 	public static int anInt1290;
+	public static int dropIndex = -1;
+	public static boolean shiftHeld;
 
 	static {
 		anIntArray1019 = new int[99];
