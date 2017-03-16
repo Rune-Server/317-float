@@ -2527,40 +2527,6 @@ public class client extends RSApplet {
 			super.idleTime -= 500;
 			stream.createFrame(202);
 		}
-		anInt988++;
-		if (anInt988 > 500) {
-			anInt988 = 0;
-			int l1 = (int) (Math.random() * 8D);
-			if ((l1 & 1) == 1)
-				anInt1278 += anInt1279;
-			if ((l1 & 2) == 2)
-				anInt1131 += anInt1132;
-			if ((l1 & 4) == 4)
-				anInt896 += anInt897;
-		}
-		if (anInt1278 < -50)
-			anInt1279 = 2;
-		if (anInt1278 > 50)
-			anInt1279 = -2;
-		if (anInt1131 < -55)
-			anInt1132 = 2;
-		if (anInt1131 > 55)
-			anInt1132 = -2;
-		if (anInt896 < -40)
-			anInt897 = 1;
-		if (anInt896 > 40)
-			anInt897 = -1;
-		anInt1254++;
-		if (anInt1254 > 500) {
-			anInt1254 = 0;
-			int i2 = (int) (Math.random() * 8D);
-			if ((i2 & 1) == 1)
-				minimapInt2 += anInt1210;
-		}
-		if (minimapInt2 < -60)
-			anInt1210 = 2;
-		if (minimapInt2 > 60)
-			anInt1210 = -2;
 		anInt1010++;
 		if (anInt1010 > 50)
 			stream.createFrame(0);
@@ -4712,7 +4678,7 @@ public class client extends RSApplet {
 	private void method81(Sprite sprite, int j, int k) {
 		int l = k * k + j * j;
 		if (l > 4225 && l < 0x15f90) {
-			int i1 = minimapInt1 + minimapInt2 & 0x7ff;
+			int i1 = minimapInt1 & 0x7ff;
 			float j1 = Model.modelIntArray1[i1];
 			float k1 = Model.modelIntArray2[i1];
 			float l1 = j * j1 + k * k1;
@@ -4890,10 +4856,6 @@ public class client extends RSApplet {
 				spellSelected = 0;
 				loadingStage = 0;
 				anInt1062 = 0;
-				anInt1278 = (int) (Math.random() * 100D) - 50;
-				anInt1131 = (int) (Math.random() * 110D) - 55;
-				anInt896 = (int) (Math.random() * 80D) - 40;
-				minimapInt2 = (int) (Math.random() * 120D) - 60;
 				minimapInt1 = (int) (Math.random() * 20D) - 10 & 0x7ff;
 				anInt1021 = 0;
 				anInt985 = -1;
@@ -5999,11 +5961,13 @@ public class client extends RSApplet {
 				clickX -= 73;
 				clickY -= 75;
 
-				int angle = minimapInt1 + minimapInt2 & 0x7ff;
+				int angle = minimapInt1 & 0x7ff;
 				float sin = Texture.anIntArray1470[angle];
 				float cos = Texture.anIntArray1471[angle];
 				float rotatedX = clickY * sin + clickX * cos;
 				float rotatedY = clickY * cos - clickX * sin;
+
+				//Divide by 4 because map is scaled 4 times. 1 Tile : 4 pixels
 				int destX = (int) ((myPlayer.x >> 7) + rotatedX / 4.0F);
 				int destZ = (int) ((myPlayer.y >> 7) - rotatedY / 4.0F);
 				boolean flag1 = doWalkTo(1, 0, 0, 0, myPlayer.smallY[0], 0, 0, destZ, myPlayer.smallX[0], true, destX);
@@ -6012,7 +5976,7 @@ public class client extends RSApplet {
 					stream.writeWordBigEndian(clickY);
 					stream.writeWord(minimapInt1);
 					stream.writeWordBigEndian(57);
-					stream.writeWordBigEndian(minimapInt2);
+					stream.writeWordBigEndian(69);
 					stream.writeWordBigEndian(69);
 					stream.writeWordBigEndian(89);
 					stream.writeWord(myPlayer.x);
@@ -7059,8 +7023,8 @@ public class client extends RSApplet {
 
 	private void method108() {
 		try {
-			int j = myPlayer.x + anInt1278;
-			int k = myPlayer.y + anInt1131;
+			int j = myPlayer.x;
+			int k = myPlayer.y;
 			if (anInt1014 - j < -500 || anInt1014 - j > 500 || anInt1015 - k < -500 || anInt1015 - k > 500) {
 				anInt1014 = j;
 				anInt1015 = k;
@@ -7734,7 +7698,7 @@ public class client extends RSApplet {
 			aRSImageProducer_1165.initDrawingArea();
 			return;
 		}
-		int i = minimapInt1 + minimapInt2 & 0x7ff;
+		int i = minimapInt1 & 0x7ff;
 		int j = 48 + myPlayer.x / 32;
 		int l2 = 464 - myPlayer.y / 32;
 		aClass30_Sub2_Sub1_Sub1_1263.method352(151, i, anIntArray1229, 256, anIntArray1052, l2, 5, 25, 146, j);
@@ -8626,7 +8590,7 @@ public class client extends RSApplet {
 	}
 
 	private void markMinimap(Sprite sprite, int i, int j) {
-		int k = minimapInt1 + minimapInt2 & 0x7ff;
+		int k = minimapInt1 & 0x7ff;
 		int l = i * i + j * j;
 		if (l > 6400)
 			return;
@@ -9834,7 +9798,7 @@ public class client extends RSApplet {
 				i = anInt984 / 256;
 			if (aBooleanArray876[4] && anIntArray1203[4] + 128 > i)
 				i = anIntArray1203[4] + 128;
-			int k = minimapInt1 + anInt896 & 0x7ff;
+			int k = minimapInt1 & 0x7ff;
 			setCameraPos(600 + i * 3, i, anInt1014, method42(plane, myPlayer.y, myPlayer.x) - 50, k, anInt1015);
 		}
 		int j;
@@ -9934,7 +9898,6 @@ public class client extends RSApplet {
 		playerIndices = new int[maxPlayers];
 		anIntArray894 = new int[maxPlayers];
 		aStreamArray895s = new Stream[maxPlayers];
-		anInt897 = 1;
 		anIntArrayArray901 = new int[104][104];
 		anInt902 = 0x766654;
 		aByteArray912 = new byte[16384];
@@ -10008,7 +9971,6 @@ public class client extends RSApplet {
 		atPlayerActions = new String[5];
 		atPlayerArray = new boolean[5];
 		anIntArrayArrayArray1129 = new int[4][13][13];
-		anInt1132 = 2;
 		aClass30_Sub2_Sub1_Sub1Array1140 = new Sprite[1000];
 		aBoolean1141 = false;
 		aBoolean1149 = false;
@@ -10030,7 +9992,6 @@ public class client extends RSApplet {
 		menuActionName = new String[500];
 		anIntArray1203 = new int[5];
 		anIntArray1207 = new int[50];
-		anInt1210 = 2;
 		anInt1211 = 78;
 		promptInput = "";
 		modIcons = new Background[2];
@@ -10050,7 +10011,6 @@ public class client extends RSApplet {
 		loginMessage1 = "";
 		loginMessage2 = "";
 		backDialogID = -1;
-		anInt1279 = 2;
 		bigX = new int[4000];
 		bigY = new int[4000];
 		anInt1289 = -1;
@@ -10122,8 +10082,6 @@ public class client extends RSApplet {
 	private int anInt893;
 	private int[] anIntArray894;
 	private Stream[] aStreamArray895s;
-	private int anInt896;
-	private int anInt897;
 	private int friendsCount;
 	private int anInt900;
 	private int[][] anIntArrayArray901;
@@ -10203,7 +10161,6 @@ public class client extends RSApplet {
 	private int anInt985;
 	private static int anInt986;
 	private Sprite[] hitMarks;
-	private int anInt988;
 	private int anInt989;
 	private final int[] anIntArray990;
 	private static boolean aBoolean993;
@@ -10331,8 +10288,6 @@ public class client extends RSApplet {
 	private final boolean[] atPlayerArray;
 	private final int[][][] anIntArrayArrayArray1129;
 	private final int[] tabInterfaceIDs = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-	private int anInt1131;
-	private int anInt1132;
 	private int menuActionRow;
 	private static int anInt1134;
 	private int spellSelected;
@@ -10403,8 +10358,6 @@ public class client extends RSApplet {
 	private static boolean flagged;
 	private final int[] anIntArray1207;
 	private int anInt1208;
-	private int minimapInt2;
-	private int anInt1210;
 	private int anInt1211;
 	private String promptInput;
 	private int anInt1213;
@@ -10444,7 +10397,6 @@ public class client extends RSApplet {
 	private int anInt1251;
 	private final boolean rsAlreadyLoaded;
 	private int anInt1253;
-	private int anInt1254;
 	private boolean welcomeScreenRaised;
 	private boolean messagePromptRaised;
 	private int anInt1257;
@@ -10464,8 +10416,6 @@ public class client extends RSApplet {
 	private TextDrawingArea chatTextDrawingArea;
 	private int anInt1275;
 	private int backDialogID;
-	private int anInt1278;
-	private int anInt1279;
 	private int[] bigX;
 	private int[] bigY;
 	private int itemSelected;
