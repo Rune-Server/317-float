@@ -5992,22 +5992,24 @@ public class client extends RSApplet {
 		if (anInt1021 != 0)
 			return;
 		if (super.clickMode3 == 1) {
-			int i = super.saveClickX - 25 - 550;
-			int j = super.saveClickY - 5 - 4;
-			if (i >= 0 && j >= 0 && i < 146 && j < 151) {
-				i -= 73;
-				j -= 75;
-				int k = minimapInt1 + minimapInt2 & 0x7ff;
-				float i1 = Texture.anIntArray1470[k];
-				float j1 = Texture.anIntArray1471[k];
-				float k1 = j * i1 + i * j1;
-				float l1 = j * j1 - i * i1;
-				int i2 = (int) (myPlayer.x + k1);
-				int j2 = (int) (myPlayer.y - l1);// FIXME broken
-				boolean flag1 = doWalkTo(1, 0, 0, 0, myPlayer.smallY[0], 0, 0, j2, myPlayer.smallX[0], true, i2);
+			int clickX = super.saveClickX - 25 - 550;
+			int clickY = super.saveClickY - 5 - 4;
+			if (clickX >= 0 && clickY >= 0 && clickX < 146 && clickY < 151) {
+				//Center the click
+				clickX -= 73;
+				clickY -= 75;
+
+				int angle = minimapInt1 + minimapInt2 & 0x7ff;
+				float sin = Texture.anIntArray1470[angle];
+				float cos = Texture.anIntArray1471[angle];
+				float rotatedX = clickY * sin + clickX * cos;
+				float rotatedY = clickY * cos - clickX * sin;
+				int destX = (int) ((myPlayer.x >> 7) + rotatedX / 4.0F);
+				int destZ = (int) ((myPlayer.y >> 7) - rotatedY / 4.0F);
+				boolean flag1 = doWalkTo(1, 0, 0, 0, myPlayer.smallY[0], 0, 0, destZ, myPlayer.smallX[0], true, destX);
 				if (flag1) {
-					stream.writeWordBigEndian(i);
-					stream.writeWordBigEndian(j);
+					stream.writeWordBigEndian(clickX);
+					stream.writeWordBigEndian(clickY);
 					stream.writeWord(minimapInt1);
 					stream.writeWordBigEndian(57);
 					stream.writeWordBigEndian(minimapInt2);

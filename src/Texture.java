@@ -1962,9 +1962,10 @@ final class Texture extends DrawingArea {
 		for (int j = 1; j < 2048; j++)
 			anIntArray1469[j] = 0x10000 / j;
 
+		double magic = 2 * Math.PI / 2048;
 		for (int k = 0; k < 2048; k++) {
-			anIntArray1470[k] = (float) (Math.sin((double) k * 0.0030679614999999999D));
-			anIntArray1471[k] = (float) (Math.cos((double) k * 0.0030679614999999999D));
+			anIntArray1470[k] = (float) Math.sin(k * magic);
+			anIntArray1471[k] = (float) Math.cos(k * magic);
 		}
 
 	}
