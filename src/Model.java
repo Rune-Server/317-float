@@ -1520,7 +1520,7 @@ public final class Model extends Animable {
 		else
 			i1 = anIntArray1637[i] & 3;
 		if (i1 == 0) {
-			Texture.method374((int) anIntArray1666[j], (int) anIntArray1666[k], (int) anIntArray1666[l], (int) anIntArray1665[j], (int) anIntArray1665[k], (int) anIntArray1665[l], (int) anIntArray1634[i], (int) anIntArray1635[i], (int) anIntArray1636[i]);
+			Texture.method374((int) anIntArray1666[j], (int) anIntArray1666[k], (int) anIntArray1666[l], (int) anIntArray1665[j], (int) anIntArray1665[k], (int) anIntArray1665[l], (int) anIntArray1634[i], (int) anIntArray1635[i], anIntArray1636[i]);
 			return;
 		}
 		if (i1 == 1) {
@@ -1532,7 +1532,7 @@ public final class Model extends Animable {
 			int l1 = anIntArray1643[j1];
 			int j2 = anIntArray1644[j1];
 			int l2 = anIntArray1645[j1];
-			Texture.method378((int) anIntArray1666[j], (int) anIntArray1666[k], (int) anIntArray1666[l], (int) anIntArray1665[j], (int) anIntArray1665[k], (int) anIntArray1665[l], (int) anIntArray1634[i], (int) anIntArray1635[i], (int) anIntArray1636[i], (int) anIntArray1668[l1], (int) anIntArray1668[j2], (int) anIntArray1668[l2], (int) anIntArray1669[l1], (int) anIntArray1669[j2], (int) anIntArray1669[l2], (int) anIntArray1670[l1], (int) anIntArray1670[j2], (int) anIntArray1670[l2], (int) anIntArray1640[i]);
+			Texture.method378((int) anIntArray1666[j], (int) anIntArray1666[k], (int) anIntArray1666[l], (int) anIntArray1665[j], (int) anIntArray1665[k], (int) anIntArray1665[l], (int) anIntArray1634[i], (int) anIntArray1635[i], anIntArray1636[i], (int) anIntArray1668[l1], (int) anIntArray1668[j2], (int) anIntArray1668[l2], (int) anIntArray1669[l1], (int) anIntArray1669[j2], (int) anIntArray1669[l2], (int) anIntArray1670[l1], (int) anIntArray1670[j2], (int) anIntArray1670[l2], (int) anIntArray1640[i]);
 			return;
 		}
 		if (i1 == 3) {
@@ -1545,8 +1545,8 @@ public final class Model extends Animable {
 	}
 
 	private void method485(int i) {
-		int j = Texture.textureInt1;
-		int k = Texture.textureInt2;
+		float j = Texture.textureInt1;
+		float k = Texture.textureInt2;
 		int l = 0;
 		int i1 = anIntArray1631[i];
 		int j1 = anIntArray1632[i];
@@ -1563,16 +1563,16 @@ public final class Model extends Animable {
 			float k3 = anIntArray1669[i1];
 			int k4 = anIntArray1634[i];
 			if (j2 >= 50) {
-				float k5 = (50.0F - l1) * modelIntArray4[(int) (j2 - l1)];
-				anIntArray1678[l] = j + (k2 + ((anIntArray1668[k1] - k2) * k5) * 512.0F) / 50.0F;
-				anIntArray1679[l] = k + (k3 + ((anIntArray1669[k1] - k3) * k5) * 512.0F) / 50.0F;
-				anIntArray1680[l++] = k4 + ((anIntArray1636[i] - k4) * k5);
+				float k5 = (50.0F - l1) / (j2 - l1);
+				anIntArray1678[l] = j + ((k2 + ((anIntArray1668[k1] - k2) * k5)) * 512.0F) / 50.0F;
+				anIntArray1679[l] = k + ((k3 + ((anIntArray1669[k1] - k3) * k5)) * 512.0F) / 50.0F;
+				anIntArray1680[l++] = (int) (k4 + ((anIntArray1636[i] - k4) * k5));
 			}
 			if (i2 >= 50) {
-				float l5 = (50.0F - l1) * modelIntArray4[(int) (i2 - l1)];
-				anIntArray1678[l] = j + (k2 + ((anIntArray1668[j1] - k2) * l5) * 512.0F) / 50.0F;
-				anIntArray1679[l] = k + (k3 + ((anIntArray1669[j1] - k3) * l5) * 512.0F) / 50.0F;
-				anIntArray1680[l++] = k4 + ((anIntArray1635[i] - k4) * l5);
+				float l5 = (50.0F - l1) / (i2 - l1);
+				anIntArray1678[l] = j + ((k2 + ((anIntArray1668[j1] - k2) * l5)) * 512.0F) / 50.0F;
+				anIntArray1679[l] = k + ((k3 + ((anIntArray1669[j1] - k3) * l5)) * 512.0F) / 50.0F;
+				anIntArray1680[l++] = (int) (k4 + ((anIntArray1635[i] - k4) * l5));
 			}
 		}
 		if (i2 >= 50) {
@@ -1584,16 +1584,16 @@ public final class Model extends Animable {
 			float l3 = anIntArray1669[j1];
 			float l4 = anIntArray1635[i];
 			if (l1 >= 50.0F) {
-				float i6 = (50.0F - i2) * modelIntArray4[(int) (l1 - i2)];
-				anIntArray1678[l] = j + (l2 + ((anIntArray1668[i1] - l2) * i6) * 512.0F) / 50.0F;
-				anIntArray1679[l] = k + (l3 + ((anIntArray1669[i1] - l3) * i6) * 512.0F) / 50.0F;
-				anIntArray1680[l++] = l4 + ((anIntArray1634[i] - l4) * i6);
+				float i6 = (50.0F - i2) / (l1 - i2);
+				anIntArray1678[l] = j + ((l2 + ((anIntArray1668[i1] - l2) * i6)) * 512.0F) / 50.0F;
+				anIntArray1679[l] = k + ((l3 + ((anIntArray1669[i1] - l3) * i6)) * 512.0F) / 50.0F;
+				anIntArray1680[l++] = (int) (l4 + ((anIntArray1634[i] - l4) * i6));
 			}
 			if (j2 >= 50.0F) {
-				float j6 = (50.0F - i2) * modelIntArray4[(int) (j2 - i2)];
-				anIntArray1678[l] = j + (l2 + ((anIntArray1668[k1] - l2) * j6) * 512.0F) / 50.0F;
-				anIntArray1679[l] = k + (l3 + ((anIntArray1669[k1] - l3) * j6) * 512.0F) / 50.0F;
-				anIntArray1680[l++] = l4 + ((anIntArray1636[i] - l4) * j6);
+				float j6 = (50.0F - i2) / (j2 - i2);
+				anIntArray1678[l] = j + ((l2 + ((anIntArray1668[k1] - l2) * j6)) * 512.0F) / 50.0F;
+				anIntArray1679[l] = k + ((l3 + ((anIntArray1669[k1] - l3) * j6)) * 512.0F) / 50.0F;
+				anIntArray1680[l++] = (int) (l4 + ((anIntArray1636[i] - l4) * j6));
 			}
 		}
 		if (j2 >= 50.0F) {
@@ -1605,16 +1605,16 @@ public final class Model extends Animable {
 			float i4 = anIntArray1669[k1];
 			int i5 = anIntArray1636[i];
 			if (i2 >= 50.0F) {
-				float k6 = (50.0F - j2) * modelIntArray4[(int) (i2 - j2)];
-				anIntArray1678[l] = j + (i3 + ((anIntArray1668[j1] - i3) * k6) * 512.0F) / 50.0F;
-				anIntArray1679[l] = k + (i4 + ((anIntArray1669[j1] - i4) * k6) * 512.0F) / 50.0F;
-				anIntArray1680[l++] = i5 + ((anIntArray1635[i] - i5) * k6);
+				float k6 = (50.0F - j2) / (i2 - j2);
+				anIntArray1678[l] = j + ((i3 + ((anIntArray1668[j1] - i3) * k6)) * 512.0F) / 50.0F;
+				anIntArray1679[l] = k + ((i4 + ((anIntArray1669[j1] - i4) * k6)) * 512.0F) / 50.0F;
+				anIntArray1680[l++] = (int) (i5 + ((anIntArray1635[i] - i5) * k6));
 			}
 			if (l1 >= 50.0F) {
-				float l6 = (50.0F - j2) * modelIntArray4[(int) (l1 - j2)];
-				anIntArray1678[l] = j + (i3 + ((anIntArray1668[i1] - i3) * l6) * 512.0F) / 50.0F;
-				anIntArray1679[l] = k + (i4 + ((anIntArray1669[i1] - i4) * l6) * 512.0F) / 50.0F;
-				anIntArray1680[l++] = i5 + ((anIntArray1634[i] - i5) * l6);
+				float l6 = (50.0F - j2) / (l1 - j2);
+				anIntArray1678[l] = j + ((i3 + ((anIntArray1668[i1] - i3) * l6)) * 512.0F) / 50.0F;
+				anIntArray1679[l] = k + ((i4 + ((anIntArray1669[i1] - i4) * l6)) * 512.0F) / 50.0F;
+				anIntArray1680[l++] = (int) (i5 + ((anIntArray1634[i] - i5) * l6));
 			}
 		}
 		float j3 = anIntArray1678[0];
@@ -1623,7 +1623,7 @@ public final class Model extends Animable {
 		float i7 = anIntArray1679[0];
 		float j7 = anIntArray1679[1];
 		float k7 = anIntArray1679[2];
-		if ((j3 - j4) * (k7 - j7) - (i7 - j7) * (j5 - j4) > 0) {// TODO figure out whats up with this shit
+		if ((j3 - j4) * (k7 - j7) - (i7 - j7) * (j5 - j4) > 0) {
 			Texture.aBoolean1462 = false;
 			if (l == 3) {
 				if (j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.centerX || j4 > DrawingArea.centerX || j5 > DrawingArea.centerX)
@@ -1634,21 +1634,21 @@ public final class Model extends Animable {
 				else
 					l7 = anIntArray1637[i] & 3;
 				if (l7 == 0) {
-					// Texture.method374((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, (int) anIntArray1680[0], (int) anIntArray1680[1], (int) anIntArray1680[2]);
+					Texture.method374((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
 				} else if (l7 == 1) {
-					// Texture.method376((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, modelIntArray3[anIntArray1634[i]]);
+					Texture.method376((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, modelIntArray3[anIntArray1634[i]]);
 				} else if (l7 == 2) {
 					int j8 = anIntArray1637[i] >> 2;
 					int k9 = anIntArray1643[j8];
 					int k10 = anIntArray1644[j8];
 					int k11 = anIntArray1645[j8];
-					// Texture.method378((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, (int) anIntArray1680[0], (int) anIntArray1680[1], (int) anIntArray1680[2], (int) anIntArray1668[k9], (int) anIntArray1668[k10], (int) anIntArray1668[k11], (int) anIntArray1669[k9], (int) anIntArray1669[k10], (int) anIntArray1669[k11], (int) anIntArray1670[k9], (int) anIntArray1670[k10], (int) anIntArray1670[k11], (int) anIntArray1640[i]);
+					Texture.method378((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], (int) anIntArray1668[k9], (int) anIntArray1668[k10], (int) anIntArray1668[k11], (int) anIntArray1669[k9], (int) anIntArray1669[k10], (int) anIntArray1669[k11], (int) anIntArray1670[k9], (int) anIntArray1670[k10], (int) anIntArray1670[k11], (int) anIntArray1640[i]);
 				} else if (l7 == 3) {
 					int k8 = anIntArray1637[i] >> 2;
 					int l9 = anIntArray1643[k8];
 					int l10 = anIntArray1644[k8];
 					int l11 = anIntArray1645[k8];
-					// Texture.method378((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1668[l9], (int) anIntArray1668[l10], (int) anIntArray1668[l11], (int) anIntArray1669[l9], (int) anIntArray1669[l10], (int) anIntArray1669[l11], (int) anIntArray1670[l9], (int) anIntArray1670[l10], (int) anIntArray1670[l11], (int) anIntArray1640[i]);
+					Texture.method378((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1668[l9], (int) anIntArray1668[l10], (int) anIntArray1668[l11], (int) anIntArray1669[l9], (int) anIntArray1669[l10], (int) anIntArray1669[l11], (int) anIntArray1670[l9], (int) anIntArray1670[l10], (int) anIntArray1670[l11], (int) anIntArray1640[i]);
 				}
 			}
 			if (l == 4) {
@@ -1660,14 +1660,14 @@ public final class Model extends Animable {
 				else
 					i8 = anIntArray1637[i] & 3;
 				if (i8 == 0) {
-					// Texture.method374((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, (int) anIntArray1680[0], (int) anIntArray1680[1], (int) anIntArray1680[2]);
-					// Texture.method374((int) i7, (int) k7, (int) anIntArray1679[3], (int) j3, (int) j5, (int) anIntArray1678[3], (int) anIntArray1680[0], (int) anIntArray1680[2], (int) anIntArray1680[3]);
+					Texture.method374((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
+					Texture.method374((int) i7, (int) k7, (int) anIntArray1679[3], (int) j3, (int) j5, (int) anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3]);
 					return;
 				}
 				if (i8 == 1) {
 					int l8 = modelIntArray3[anIntArray1634[i]];
-					// Texture.method376((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, (int) l8);
-					// Texture.method376((int) i7, (int) k7, (int) anIntArray1679[3], (int) j3, (int) j5, (int) anIntArray1678[3], (int) l8);
+					Texture.method376((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, (int) l8);
+					Texture.method376((int) i7, (int) k7, (int) anIntArray1679[3], (int) j3, (int) j5, (int) anIntArray1678[3], (int) l8);
 					return;
 				}
 				if (i8 == 2) {
@@ -1675,8 +1675,8 @@ public final class Model extends Animable {
 					int i10 = anIntArray1643[i9];
 					int i11 = anIntArray1644[i9];
 					int i12 = anIntArray1645[i9];
-					// Texture.method378((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, (int) anIntArray1680[0], (int) anIntArray1680[1], (int) anIntArray1680[2], (int) anIntArray1668[i10], (int) anIntArray1668[i11], (int) anIntArray1668[i12], (int) anIntArray1669[i10], (int) anIntArray1669[i11], (int) anIntArray1669[i12], (int) anIntArray1670[i10], (int) anIntArray1670[i11], (int) anIntArray1670[i12], (int) anIntArray1640[i]);
-					// Texture.method378((int) i7, (int) k7, (int) anIntArray1679[3], (int) j3, (int) j5, (int) anIntArray1678[3], (int) anIntArray1680[0], (int) anIntArray1680[2], (int) anIntArray1680[3], (int) anIntArray1668[i10], (int) anIntArray1668[i11], (int) anIntArray1668[i12], (int) anIntArray1669[i10], (int) anIntArray1669[i11], (int) anIntArray1669[i12], (int) anIntArray1670[i10], (int) anIntArray1670[i11], (int) anIntArray1670[i12], (int) anIntArray1640[i]);
+					Texture.method378((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], (int) anIntArray1668[i10], (int) anIntArray1668[i11], (int) anIntArray1668[i12], (int) anIntArray1669[i10], (int) anIntArray1669[i11], (int) anIntArray1669[i12], (int) anIntArray1670[i10], (int) anIntArray1670[i11], (int) anIntArray1670[i12], (int) anIntArray1640[i]);
+					Texture.method378((int) i7, (int) k7, (int) anIntArray1679[3], (int) j3, (int) j5, (int) anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], (int) anIntArray1668[i10], (int) anIntArray1668[i11], (int) anIntArray1668[i12], (int) anIntArray1669[i10], (int) anIntArray1669[i11], (int) anIntArray1669[i12], (int) anIntArray1670[i10], (int) anIntArray1670[i11], (int) anIntArray1670[i12], (int) anIntArray1640[i]);
 					return;
 				}
 				if (i8 == 3) {
@@ -1684,8 +1684,8 @@ public final class Model extends Animable {
 					int j10 = anIntArray1643[j9];
 					int j11 = anIntArray1644[j9];
 					int j12 = anIntArray1645[j9];
-					// Texture.method378((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1668[j10], (int) anIntArray1668[j11], (int) anIntArray1668[j12], (int) anIntArray1669[j10], (int) anIntArray1669[j11], (int) anIntArray1669[j12], (int) anIntArray1670[j10], (int) anIntArray1670[j11], (int) anIntArray1670[j12], (int) anIntArray1640[i]);
-					// Texture.method378((int) i7, (int) k7, (int) anIntArray1679[3], (int) j3, (int) j5, (int) anIntArray1678[3], (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1668[j10], (int) anIntArray1668[j11], (int) anIntArray1668[j12], (int) anIntArray1669[j10], (int) anIntArray1669[j11], (int) anIntArray1669[j12], (int) anIntArray1670[j10], (int) anIntArray1670[j11], (int) anIntArray1670[j12], (int) anIntArray1640[i]);
+					Texture.method378((int) i7, (int) j7, (int) k7, (int) j3, (int) j4, (int) j5, (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1668[j10], (int) anIntArray1668[j11], (int) anIntArray1668[j12], (int) anIntArray1669[j10], (int) anIntArray1669[j11], (int) anIntArray1669[j12], (int) anIntArray1670[j10], (int) anIntArray1670[j11], (int) anIntArray1670[j12], (int) anIntArray1640[i]);
+					Texture.method378((int) i7, (int) k7, (int) anIntArray1679[3], (int) j3, (int) j5, (int) anIntArray1678[3], (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1634[i], (int) anIntArray1668[j10], (int) anIntArray1668[j11], (int) anIntArray1668[j12], (int) anIntArray1669[j10], (int) anIntArray1669[j11], (int) anIntArray1669[j12], (int) anIntArray1670[j10], (int) anIntArray1670[j11], (int) anIntArray1670[j12], (int) anIntArray1640[i]);
 				}
 			}
 		}
@@ -1758,7 +1758,7 @@ public final class Model extends Animable {
 	private static int[] anIntArray1677 = new int[12];
 	private static final float[] anIntArray1678 = new float[10];
 	private static final float[] anIntArray1679 = new float[10];
-	private static final float[] anIntArray1680 = new float[10];
+	private static final int[] anIntArray1680 = new int[10];
 	private static int anInt1681;
 	private static int anInt1682;
 	private static int anInt1683;
